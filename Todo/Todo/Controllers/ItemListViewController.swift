@@ -30,6 +30,25 @@ class ItemListViewController: SwipeTableViewController {
 
 	override func viewWillAppear(_ animated: Bool) {
 		tableView.contentOffset = CGPoint(x: 0.0, y: searchBar.frame.size.height)
+		guard let category = selectedCategory else { return }
+		guard let color = category.color else { return }
+		title = category.name
+		updateNavigationBar(withHexCode: color)
+	}
+
+	override func viewWillDisappear(_ animated: Bool) {
+		updateNavigationBar(withHexCode: "1D9BF6")
+	}
+
+	func updateNavigationBar(withHexCode colorHexCode : String) {
+		guard let navigationBar = navigationController?.navigationBar else {
+			fatalError("Navigation Controller was not found.")
+		}
+		navigationBar.barTintColor = UIColor(hexString: colorHexCode)
+		searchBar.barTintColor = UIColor(hexString: colorHexCode)
+		let contrast = UIColor(contrastingBlackOrWhiteColorOn: UIColor(hexString: colorHexCode), isFlat: true)
+		navigationBar.tintColor = contrast
+		navigationBar.largeTitleTextAttributes = [NSAttributedStringKey.foregroundColor : contrast as Any]
 	}
 
     @IBAction func addItemButtonPressed(_ sender: UIBarButtonItem) {

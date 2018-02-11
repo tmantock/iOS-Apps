@@ -34,7 +34,6 @@
                     </tableView>
                     <navigationItem key="navigationItem" title="Todo" id="YBO-ru-ph1">
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="cfx-st-onC">
-                            <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <connections>
                                 <action selector="addCatergoryButtonPressed:" destination="8Dy-B2-Daj" id="yl4-du-iw7"/>
                             </connections>
@@ -81,7 +80,6 @@
                     </tableView>
                     <navigationItem key="navigationItem" title="Todo" id="a9C-ix-6Lq">
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="xyK-4W-ABo">
-                            <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <connections>
                                 <action selector="addItemButtonPressed:" destination="jlj-uR-mrH" id="6dV-O9-etV"/>
                             </connections>
@@ -100,8 +98,8 @@
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="gBf-4D-50k" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="nU9-jw-GVV">
-                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" largeTitles="YES" id="nU9-jw-GVV">
+                        <rect key="frame" x="0.0" y="20" width="375" height="96"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="barTintColor" red="0.0" green="0.58980089430000004" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <textAttributes key="titleTextAttributes">
