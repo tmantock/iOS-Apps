@@ -8,6 +8,11 @@
 
 /* Begin PBXBuildFile section */
 		D756C3DD2001615B00933ED1 /* CategoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D756C3DC2001615B00933ED1 /* CategoryViewController.swift */; };
+		D7693AD72030E4100021EC28 /* ModalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7693AD62030E4100021EC28 /* ModalViewController.swift */; };
+		D7693ADA2030E6600021EC28 /* ModalPresentationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7693AD92030E6600021EC28 /* ModalPresentationController.swift */; };
+		D7693ADC2030F44C0021EC28 /* CreateCategoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7693ADB2030F44C0021EC28 /* CreateCategoryViewController.swift */; };
+		D7693ADF2030F8D90021EC28 /* Views.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7693ADE2030F8D90021EC28 /* Views.swift */; };
+		D7693AE1203273D80021EC28 /* CreateItemViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7693AE0203273D80021EC28 /* CreateItemViewController.swift */; };
 		D793FDF320088BC80023BD3E /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = D793FDF220088BC80023BD3E /* Item.swift */; };
 		D793FDF520088BD20023BD3E /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = D793FDF420088BD20023BD3E /* Category.swift */; };
 		D7D0EC0B1FFDE19C00818DF5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7D0EC0A1FFDE19C00818DF5 /* AppDelegate.swift */; };
@@ -23,6 +28,11 @@
 		8BBF5AC4DA812C6019692E65 /* Pods-Todo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Todo.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Todo/Pods-Todo.debug.xcconfig"; sourceTree = "<group>"; };
 		A990D41313167D21B0BC7BB8 /* Pods-Todo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Todo.release.xcconfig"; path = "Pods/Target Support Files/Pods-Todo/Pods-Todo.release.xcconfig"; sourceTree = "<group>"; };
 		D756C3DC2001615B00933ED1 /* CategoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryViewController.swift; sourceTree = "<group>"; };
+		D7693AD62030E4100021EC28 /* ModalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModalViewController.swift; sourceTree = "<group>"; };
+		D7693AD92030E6600021EC28 /* ModalPresentationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModalPresentationController.swift; sourceTree = "<group>"; };
+		D7693ADB2030F44C0021EC28 /* CreateCategoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateCategoryViewController.swift; sourceTree = "<group>"; };
+		D7693ADE2030F8D90021EC28 /* Views.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Views.swift; sourceTree = "<group>"; };
+		D7693AE0203273D80021EC28 /* CreateItemViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateItemViewController.swift; sourceTree = "<group>"; };
 		D793FDF220088BC80023BD3E /* Item.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Item.swift; sourceTree = "<group>"; };
 		D793FDF420088BD20023BD3E /* Category.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Category.swift; sourceTree = "<group>"; };
 		D7D0EC071FFDE19C00818DF5 /* Todo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Todo.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -80,6 +90,9 @@
 				D7D0EC0C1FFDE19C00818DF5 /* ItemListViewController.swift */,
 				D756C3DC2001615B00933ED1 /* CategoryViewController.swift */,
 				D7DF4AC9201190DF00921A4C /* SwipeTableViewController.swift */,
+				D7693AD62030E4100021EC28 /* ModalViewController.swift */,
+				D7693ADB2030F44C0021EC28 /* CreateCategoryViewController.swift */,
+				D7693AE0203273D80021EC28 /* CreateItemViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -93,9 +106,26 @@
 			path = Views;
 			sourceTree = "<group>";
 		};
+		D7693AD82030E63A0021EC28 /* Presentations */ = {
+			isa = PBXGroup;
+			children = (
+				D7693AD92030E6600021EC28 /* ModalPresentationController.swift */,
+			);
+			path = Presentations;
+			sourceTree = "<group>";
+		};
+		D7693ADD2030F8CA0021EC28 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				D7693ADE2030F8D90021EC28 /* Views.swift */,
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
 		D7D0EBFE1FFDE19C00818DF5 = {
 			isa = PBXGroup;
 			children = (
+				D7693ADD2030F8CA0021EC28 /* Utils */,
 				D7D0EC091FFDE19C00818DF5 /* Todo */,
 				D7D0EC081FFDE19C00818DF5 /* Products */,
 				A5110949B430DDD90828F1CF /* Pods */,
@@ -114,6 +144,7 @@
 		D7D0EC091FFDE19C00818DF5 /* Todo */ = {
 			isa = PBXGroup;
 			children = (
+				D7693AD82030E63A0021EC28 /* Presentations */,
 				D7547D891FFF53CD005A8B32 /* Views */,
 				D7547D881FFF53B4005A8B32 /* Controllers */,
 				D7547D851FFF5317005A8B32 /* Models */,
@@ -262,9 +293,14 @@
 				D793FDF320088BC80023BD3E /* Item.swift in Sources */,
 				D756C3DD2001615B00933ED1 /* CategoryViewController.swift in Sources */,
 				D7D0EC0D1FFDE19C00818DF5 /* ItemListViewController.swift in Sources */,
+				D7693ADA2030E6600021EC28 /* ModalPresentationController.swift in Sources */,
 				D7D0EC0B1FFDE19C00818DF5 /* AppDelegate.swift in Sources */,
+				D7693AE1203273D80021EC28 /* CreateItemViewController.swift in Sources */,
 				D7DF4ACA201190DF00921A4C /* SwipeTableViewController.swift in Sources */,
+				D7693ADC2030F44C0021EC28 /* CreateCategoryViewController.swift in Sources */,
 				D793FDF520088BD20023BD3E /* Category.swift in Sources */,
+				D7693ADF2030F8D90021EC28 /* Views.swift in Sources */,
+				D7693AD72030E4100021EC28 /* ModalViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

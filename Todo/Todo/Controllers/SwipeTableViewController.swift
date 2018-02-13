@@ -46,6 +46,4 @@ class SwipeTableViewController: UITableViewController, SwipeTableViewCellDelegat
 	func rightSwipeToDeleteTriggered(at indexPath : IndexPath) {
 
 	}
-
-
 }

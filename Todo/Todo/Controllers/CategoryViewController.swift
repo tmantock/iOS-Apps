@@ -27,23 +27,9 @@ class CategoryViewController: SwipeTableViewController {
     }
 
     @IBAction func addCatergoryButtonPressed(_ sender: UIBarButtonItem) {
-        var field = UITextField()
-        let alert = UIAlertController(title: "Add New Category", message: "", preferredStyle: .alert)
-        
-        alert.addTextField { (alertTextField) in
-            alertTextField.placeholder = "Create New Category"
-            field = alertTextField
-        }
-        
-        alert.addAction(UIAlertAction(title: "Add Category", style: .default, handler: { (_) in
-            guard let value = field.text else { return }
-            let category = Category()
-            category.name = value
-			category.color = UIColor.randomFlat().hexValue()
-            self.saveCategory(category: category)
-        }))
-        
-        present(alert, animated: true, completion: nil)
+		let addCategoryModal = CreateCategoryViewController()
+		addCategoryModal.delegate = self
+		present(addCategoryModal, animated: true, completion: nil)
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -77,14 +63,6 @@ class CategoryViewController: SwipeTableViewController {
     }
     
 	func saveCategory(category : Category) {
-        do {
-			try realm.write {
-				realm.add(category)
-			}
-        } catch {
-            print("Error saving category: \(error)")
-        }
-        
         tableView.reloadData()
     }
 
@@ -101,5 +79,11 @@ class CategoryViewController: SwipeTableViewController {
 	override func rightSwipeToDeleteTriggered(at indexPath: IndexPath) {
 		guard let category = self.categories?[indexPath.row] else { return }
 		deleteCategory(category: category)
+	}
+}
+
+extension CategoryViewController : ModalViewControllerDelegate {
+	func modalIsClosing() {
+		tableView.reloadData()
 	}
 }

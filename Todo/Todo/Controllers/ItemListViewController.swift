@@ -52,32 +52,9 @@ class ItemListViewController: SwipeTableViewController {
 	}
 
     @IBAction func addItemButtonPressed(_ sender: UIBarButtonItem) {
-        var field = UITextField()
-        let alert = UIAlertController(title: "Add New Item", message: "", preferredStyle: .alert)
-
-        alert.addTextField { (alertTextField) in
-            alertTextField.placeholder = "Create New Item"
-            field = alertTextField
-        }
-
-        alert.addAction(UIAlertAction(title: "Add Item", style: .default, handler: { (_) in
-            guard let value = field.text else { return }
-			guard let category = self.selectedCategory else { return }
-			do {
-				try self.realm.write {
-					let item = Item()
-					item.title = value
-					item.dateCreated = Date()
-					category.items.append(item)
-				}
-			} catch {
-					print("Error saving context")
-			}
-
-			self.tableView.reloadData()
-        }))
-        
-        present(alert, animated: true, completion: nil)
+		let createItemViewController = CreateItemViewController()
+		createItemViewController.delegate = self
+		present(createItemViewController, animated: true, completion: nil)
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -155,5 +132,24 @@ extension ItemListViewController : UISearchBarDelegate {
             }
         }
     }
+}
+
+extension ItemListViewController : CreateItemViewControllerDelegate {
+	func saveItem(item: Item) {
+		guard let category = selectedCategory else { return }
+
+		do {
+			try realm.write {
+				category.items.append(item)
+			}
+		} catch {
+			print("Error saving item")
+		}
+
+	}
+
+	func modalIsClosing() {
+		tableView.reloadData()
+	}
 }
 
