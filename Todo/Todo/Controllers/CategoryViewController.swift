@@ -12,6 +12,7 @@ import ChameleonFramework
 
 class CategoryViewController: SwipeTableViewController {
 	let realm = try! Realm()
+	let modalTransition = ModalTransitionDelegate()
 	var categories : Results<Category>?
 
     override func viewDidLoad() {
@@ -28,6 +29,9 @@ class CategoryViewController: SwipeTableViewController {
 
     @IBAction func addCatergoryButtonPressed(_ sender: UIBarButtonItem) {
 		let addCategoryModal = CreateCategoryViewController()
+		addCategoryModal.transitioningDelegate = modalTransition
+		addCategoryModal.modalPresentationStyle = .custom
+		addCategoryModal.modalTransitionStyle = .coverVertical
 		addCategoryModal.delegate = self
 		present(addCategoryModal, animated: true, completion: nil)
     }

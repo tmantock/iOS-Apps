@@ -9,43 +9,31 @@
 import UIKit
 import RealmSwift
 import ChameleonFramework
+import Eureka
 
 class CreateCategoryViewController : ModalViewController {
 	let realm = try! Realm()
 
-	let categoryLabel : UILabel = {
-		let label = UILabel()
-		label.text = "Enter a name for the category"
-
-		return label
-	}()
-
-	let categoryTextField : UITextField = {
-		let field = UITextField()
-		field.borderStyle = .roundedRect
-		field.placeholder = "Category"
-
-		return field
-	}()
-
 	override func viewDidLoad() {
 		super.viewDidLoad()
 
-		let stackView = UIStackView(arrangedSubviews: [categoryLabel, categoryTextField])
-		stackView.axis = .vertical
-		stackView.spacing = 10
-		stackView.distribution = .fillEqually
-		view.addSubview(stackView)
-		stackView.anchor(top: actionBar.bottomAnchor, right: view.rightAnchor, bottom: nil, left: view.leftAnchor, paddingTop: 20, paddingRight: -20, paddingBottom: 0, paddingLeft: 20, height: 0, width: 0)
+		form +++ Section("Add a Category"){ section in
+			section.header?.height = {100}
+			}
+			<<< TextRow() { row in
+				row.tag = "newCategory"
+				row.title = "Category"
+				row.placeholder = "This is for"
+		}
 	}
 
 	override func cancelButtonPressed() {
-		categoryTextField.text = ""
 		super.cancelButtonPressed()
 	}
 
 	override func submitButtonPressed() {
-		guard let value = categoryTextField.text else { return }
+		let row : TextRow? = form.rowBy(tag: "newCategory")
+		guard let value = row?.value else { return }
 
 		if value.trimmingCharacters(in: .whitespacesAndNewlines).count == 0 {
 			return

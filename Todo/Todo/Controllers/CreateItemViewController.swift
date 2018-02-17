@@ -7,46 +7,36 @@
 //
 
 import UIKit
+import Eureka
+import RealmSwift
 
 class CreateItemViewController : ModalViewController {
-	var itemDelegate: CreateItemViewControllerDelegate? {
-		get { return self.delegate as? CreateItemViewControllerDelegate }
-		set { self.delegate = newValue }
-	}
-
-	let itemLabel : UILabel = {
-		let label = UILabel()
-		label.text = "Enter a name for the item"
-
-		return label
-	}()
-
-	let itemTextField : UITextField = {
-		let field = UITextField()
-		field.borderStyle = .roundedRect
-		field.placeholder = "Category"
-
-		return field
-	}()
+	let realm = try! Realm()
+	var category : Category?
 
 	override func viewDidLoad() {
 		super.viewDidLoad()
 
-		let stackView = UIStackView(arrangedSubviews: [itemLabel, itemTextField])
-		stackView.axis = .vertical
-		stackView.spacing = 10
-		stackView.distribution = .fillEqually
-		view.addSubview(stackView)
-		stackView.anchor(top: actionBar.bottomAnchor, right: view.rightAnchor, bottom: nil, left: view.leftAnchor, paddingTop: 20, paddingRight: -20, paddingBottom: 0, paddingLeft: 20, height: 0, width: 0)
+		form +++ Section("Add an Item"){ section in
+				section.header?.height = {100}
+			}
+			<<< TextRow() { row in
+				row.tag = "newItem"
+				row.title = "Item"
+				row.placeholder = "I need to"
+		}
 	}
 
 	override func cancelButtonPressed() {
-		itemTextField.text = ""
+		let row : TextRow? = form.rowBy(tag: "newItem")
+		row?.value = ""
 		super.cancelButtonPressed()
 	}
 
 	override func submitButtonPressed() {
-		guard let value = itemTextField.text else { return }
+		let row : TextRow? = form.rowBy(tag: "newItem")
+		guard let value = row?.value else { return }
+		guard let category = category else { return }
 
 		if value.trimmingCharacters(in: .whitespacesAndNewlines).count == 0 {
 			return
@@ -56,11 +46,14 @@ class CreateItemViewController : ModalViewController {
 		item.title = value
 		item.dateCreated = Date()
 
-		itemDelegate?.saveItem(item: item)
+		do {
+			try realm.write {
+				category.items.append(item)
+			}
+		} catch {
+			print("Error saving item")
+		}
+
 		super.submitButtonPressed()
 	}
-}
-
-protocol CreateItemViewControllerDelegate : ModalViewControllerDelegate {
-	func saveItem(item : Item)
 }

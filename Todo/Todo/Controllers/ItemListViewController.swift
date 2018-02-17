@@ -12,6 +12,7 @@ import ChameleonFramework
 
 class ItemListViewController: SwipeTableViewController {
     let realm = try! Realm()
+	let modalTransition = ModalTransitionDelegate()
 	var items : Results<Item>?
     var selectedCategory : Category? {
         didSet {
@@ -22,14 +23,13 @@ class ItemListViewController: SwipeTableViewController {
 	@IBOutlet weak var searchBar: UISearchBar!
 
 	override func viewDidLoad() {
-        super.viewDidLoad()
+		super.viewDidLoad()
 		tableView.rowHeight = 70
 		tableView.separatorStyle = .none
-		tableView.tableHeaderView = searchBar
-    }
+		tableView.contentOffset = CGPoint(x: 0, y: searchBarOffset())
+	}
 
 	override func viewWillAppear(_ animated: Bool) {
-		tableView.contentOffset = CGPoint(x: 0.0, y: searchBar.frame.size.height)
 		guard let category = selectedCategory else { return }
 		guard let color = category.color else { return }
 		title = category.name
@@ -38,6 +38,10 @@ class ItemListViewController: SwipeTableViewController {
 
 	override func viewWillDisappear(_ animated: Bool) {
 		updateNavigationBar(withHexCode: "1D9BF6")
+	}
+
+	func searchBarOffset() -> CGFloat {
+		return tableView.contentOffset.y + searchBar.bounds.height
 	}
 
 	func updateNavigationBar(withHexCode colorHexCode : String) {
@@ -53,7 +57,11 @@ class ItemListViewController: SwipeTableViewController {
 
     @IBAction func addItemButtonPressed(_ sender: UIBarButtonItem) {
 		let createItemViewController = CreateItemViewController()
+		createItemViewController.transitioningDelegate = modalTransition
+		createItemViewController.modalPresentationStyle = .custom
+		createItemViewController.modalTransitionStyle = .coverVertical
 		createItemViewController.delegate = self
+		createItemViewController.category = selectedCategory
 		present(createItemViewController, animated: true, completion: nil)
     }
 
@@ -134,22 +142,9 @@ extension ItemListViewController : UISearchBarDelegate {
     }
 }
 
-extension ItemListViewController : CreateItemViewControllerDelegate {
-	func saveItem(item: Item) {
-		guard let category = selectedCategory else { return }
-
-		do {
-			try realm.write {
-				category.items.append(item)
-			}
-		} catch {
-			print("Error saving item")
-		}
-
-	}
-
+extension ItemListViewController : ModalViewControllerDelegate {
 	func modalIsClosing() {
-		tableView.reloadData()
+
 	}
 }
 

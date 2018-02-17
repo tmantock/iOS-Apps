@@ -7,11 +7,10 @@
 //
 
 import UIKit
+import Eureka
 
-class ModalViewController: UIViewController {
+class ModalViewController: FormViewController {
 	weak var delegate : ModalViewControllerDelegate?
-
-	let modalTransition = ModalTransitionDelegate()
 
 	let cancelButton : UIButton = {
 		let button = UIButton(type: .system)
@@ -33,25 +32,13 @@ class ModalViewController: UIViewController {
 
 	let actionBar : UIView = {
 		let view = UIView()
-		view.backgroundColor = UIColor.flatGray().withAlphaComponent(0.6)
+		view.backgroundColor = UIColor.flatGray().withAlphaComponent(0.2)
 
 		return view
 	}()
 
-	override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
-		super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
-
-		transitioningDelegate = modalTransition
-		modalPresentationStyle = .custom
-		modalTransitionStyle = .coverVertical
-	}
-
-	required init?(coder aDecoder: NSCoder) {
-		fatalError("init(coder:) has not been implemented")
-	}
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
+	override func viewDidLoad() {
+		super.viewDidLoad()
 
 		view.backgroundColor = .white
 		let stackView = UIStackView(arrangedSubviews: [cancelButton, submitButton])
@@ -72,11 +59,6 @@ class ModalViewController: UIViewController {
 	@objc func submitButtonPressed() {
 		delegate?.modalIsClosing()
 		dismiss(animated: true, completion: nil)
-	}
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
 	}
 }
 

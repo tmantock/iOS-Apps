@@ -9,5 +9,6 @@ target 'Todo' do
   pod 'RealmSwift'
   pod 'SwipeCellKit'
   pod 'ChameleonFramework'
+  pod 'Eureka'
 
 end
